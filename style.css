@@ -136,6 +136,7 @@ section {
     padding-bottom: 20px;
 }
 
+
 section:nth-child(2n) {
     background-color: #9e9b9b29;
 }
@@ -599,7 +600,7 @@ button:focus {
     }
 
     .timeline-box::after {
-        left: -9.3% !important;
+        left: -10.4% !important;
     }
 
     #timeline-divider {
