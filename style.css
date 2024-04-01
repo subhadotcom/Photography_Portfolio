@@ -137,7 +137,7 @@ section {
 }
 
 section{
-  background-color: #1c261e;
+  background-color: #242a33;
 }
 
 .section-heading {
@@ -202,10 +202,8 @@ section{
 .skill-progress {
     width: 7rem;
     height: 2.2rem;
-    background-color: lightgrey;
     text-align: center;
     border-radius: 1rem;
-    box-shadow: 1px 1px 2px 1px #b9b9b9 inset;
     margin: 25px;
     overflow: hidden;
 }
@@ -216,11 +214,10 @@ section{
 
 .skill-progress > div {
     border-radius: 20px 0px 0px 20px;
-    box-shadow: 1px 1px 5px 2px #989882;
 }
 
 .skill-name span {
-    color: white;
+    color: gray;
     font-size: 1rem;
     margin-left: 10px;
     vertical-align: middle;
@@ -537,38 +534,8 @@ button:focus {
 }
 
 .mb-light-purple {
-    background-color: #93738c;
+    background-color: #50565e;
 }
-
-
-
-/*Percentage Classes */
-
-.ninty-percent{
-    height: inherit;
-    width: 90%;
-}
-
-.eighty-percent {
-    height: inherit;
-    width: 80%;
-}
-
-.sixty-percent {
-    height: inherit;
-    width: 60%;
-}
-
-.seventy-five-percent {
-    height: inherit;
-    width: 75%;
-}
-
-.ninty-percent {
-    height: inherit;
-    width: 90%;
-}
-
 
 
 @media only screen and (max-width: 572px) {
