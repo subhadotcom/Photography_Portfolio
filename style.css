@@ -14,7 +14,7 @@ body::-webkit-scrollbar {
 #body-header {
     height: 65vh;
     opacity: 0.9;
-    background-image: url(macbook.jpg);
+    background-image: url(macbook.pngs);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
