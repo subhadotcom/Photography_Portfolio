@@ -136,8 +136,12 @@ section {
     padding-bottom: 20px;
 }
 
-section{
-  background-color: #242a33;
+section:nth-child(2n) {
+    background-color: #21262e;
+}
+
+section:nth-child(2n + 1) {
+    background-color: #242a33;
 }
 
 .section-heading {
