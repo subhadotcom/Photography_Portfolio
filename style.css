@@ -174,7 +174,7 @@ section:nth-child(2n + 1) {
     margin-top: -17vh;
 }
 
-#my-image img {
+#my-image img{
     height: 100%;
     width: 100%;
     border-radius: 50%;
@@ -194,35 +194,65 @@ section:nth-child(2n + 1) {
 
 /*Skills Section*/
 
-.card-container {
+.card-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
 }
 
-.skill-section {
-    background-color: #50565e;
-    color: white;
-    height: 100px;
-    width: 150px;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 10px;
-    font-weight: bold;
-    font-style: italic;
-    color: grey;
-    transition: background-color  0.3s ease-in-out; 
+figure {
+    width: 120px;
+    aspect-ratio: 8 / 5;
+    --bg: hsl(330 80% calc(90% - (var(--hover) * 10%)));
+    --accent: hsl(280 80% 40%);
+    transition: background 0.2s;
+    background:
+      radial-gradient(circle at top left, var(--accent), transparent 75%),
+      var(--bg);
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
 }
-
-.skill-section:hover {
-    background-color: #333;
+  
+figure:after {
+    content: "";
+    position: absolute;
+    width: 20%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    bottom: 0%;
+    left: 10%;
+    background: linear-gradient(-65deg, var(--bg) 50%, var(--accent) 50%);
+    filter: blur(25px);
+    transform:
+      translateX(calc(var(--hover) * 15%))
+      scale(calc(1 + (var(--hover) * 0.2)));
+    transition: transform 0.2s, background 0.2s;
 }
+  
+.card-container img {
+    position: absolute;
+    z-index: 1;
+    left: 30%;
+    top: 15%;
+    width: 40%;
+    transform:
+      translateX(calc(var(--hover) * -15%))
+      scale(calc(1 + (var(--hover) * 0.2)));
+    transition: transform 0.2s;
+  }
+  
+article {
+    --hover: 0;
+  }
+  
+article:hover {
+    --hover: 1;
+  }
 
 /* Work Experience */
 
@@ -266,8 +296,6 @@ section:nth-child(2n + 1) {
 .timeline-container {
     padding: 8px;
 }
-
-
 
 #timeline-divider {
     position: absolute;
@@ -323,7 +351,7 @@ section:nth-child(2n + 1) {
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    padding: 0 50px;
+    padding: 0 20px;
     margin-bottom: 20px;
     justify-content: space-around;
 }
@@ -359,7 +387,7 @@ section:nth-child(2n + 1) {
 
 .portfolio-image-container:hover .portfolio-details {
     background-color: #80808078;
-    color: white;
+    color: rgb(30, 3, 3);
 }
 
 
