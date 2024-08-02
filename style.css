@@ -179,7 +179,7 @@ section:nth-child(2n + 1) {
     width: 100%;
     border-radius: 50%;
     border: 3px solid white;
-    box-shadow: 1px 1px 10px 2px lightgrey;
+    filter: drop-shadow(1px 1px 20px yellow);
 }
 
 #about-para {
