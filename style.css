@@ -382,6 +382,9 @@ article:hover {
 
 .portfolio-image-container:hover {
     box-shadow: 0 0 20px #74ADC8;
+    height: 345px;
+    width: 300px;
+    font-size: 13px;
 }
 
 .portfolio-image-container:hover .portfolio-details {
@@ -585,7 +588,7 @@ button:focus {
 
     .timeline-box {
         width: 90%;
-        left: 10.4% !important;
+        left: 9.8% !important;
     }
 
     .timeline-box::after {
@@ -614,10 +617,6 @@ button:focus {
         width: 80%;
         margin: 10%;
     }
-    body::-webkit-scrollbar { 
-        display: none; 
-    }
-
 }
 
 ::-webkit-scrollbar {
