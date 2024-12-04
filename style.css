@@ -4,9 +4,9 @@ body {
     font-size: 30px;
 }
 
-body::-webkit-scrollbar { 
+/* body::-webkit-scrollbar { 
     display: none; 
-}
+} */
 
 
 /* Body Header */
@@ -281,11 +281,11 @@ article:hover {
 }
 
 .timeline-box:nth-child(2n) {
-    left: 53%;
+    left: 53.1%;
 }
 
 .timeline-box:nth-child(2n+1)::after {
-    right: -11.8%;
+    right: -11.9%;
 }
 
 .timeline-box:nth-child(2n)::after {
@@ -319,25 +319,25 @@ article:hover {
     color: #2857a4;
 }
 
-.experience-designation {
+.education-designation {
     font-size: 1.4rem;
 }
 
-.experience-company-name {
+.education-company-name {
     margin: 5px 0 0;
     color: #eb822d;
     font-weight: 400;
     font-size: 1.2rem;
 }
 
-.experience-duration {
+.education-duration {
     color: #9e9b9b;
     font-weight: 100;
     color: grey;
     font-size: 1rem;
 }
 
-.experience-description {
+.education-description {
     font-size: 14px;
     padding: 2px;
     color: grey;
@@ -614,5 +614,21 @@ button:focus {
         width: 80%;
         margin: 10%;
     }
+    body::-webkit-scrollbar { 
+        display: none; 
+    }
 
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #333; 
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #222;
+  }
