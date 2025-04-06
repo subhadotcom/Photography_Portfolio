@@ -105,4 +105,78 @@ sections.forEach(section => {
     section.style.transform = 'translateY(20px)';
     section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(section);
+});
+
+// Slideshow functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.querySelector('.slide-dots');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    // Function to update slides
+    function updateSlides() {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    // Function to go to specific slide
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlides();
+        resetInterval();
+    }
+
+    // Function to go to next slide
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlides();
+    }
+
+    // Function to go to previous slide
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlides();
+    }
+
+    // Function to reset interval
+    function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    }
+
+    // Event listeners for buttons
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetInterval();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetInterval();
+    });
+
+    // Start slideshow
+    resetInterval();
+
+    // Pause slideshow on hover
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    slideshowContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    slideshowContainer.addEventListener('mouseleave', resetInterval);
 }); 
