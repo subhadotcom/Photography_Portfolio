@@ -79,12 +79,17 @@
     }
     
     .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+    
+    .gallery-item {
+        aspect-ratio: 1;
     }
     
     .gallery-item img {
-        height: 250px;
+        height: 100%;
     }
     
     .slide-btn {
@@ -112,8 +117,9 @@
     }
     
     .gallery {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        padding: 0 0.5rem;
     }
     
     .gallery-buttons {

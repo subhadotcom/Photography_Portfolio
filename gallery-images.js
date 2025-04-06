@@ -18,7 +18,7 @@ const galleryImages = [
     { path: 'images/20241211_132747.jpg', alt: 'Nature Photography 16' },
     { path: 'images/20241231_115546.jpg', alt: 'Nature Photography 17' },
     { path: 'images/20250112_121148.jpg', alt: 'Nature Photography 18' },
-    { path: 'images/20250112_101112.jpg', alt: 'Nature Photography 18' },
+    { path: 'images/20250124_101112.jpg', alt: 'Nature Photography 19' },
     { path: 'images/20220417_105620.jpg', alt: 'Nature Photography 20' },
     { path: 'images/20220417_113857.jpg', alt: 'Nature Photography 21' },
     { path: 'images/20220409_185456.jpg', alt: 'Nature Photography 22' },
