@@ -399,15 +399,51 @@ body {
     background-color: #27ae60;
 }
 
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
 /* About Section */
 #about {
     padding: 5rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    transition: background 0.3s ease;
+}
+
+#about:hover {
+    background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
 }
 
 #about h2 {
     text-align: center;
     margin-bottom: 3rem;
     color: #2c3e50;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: color 0.3s ease;
+}
+
+#about:hover h2 {
+    color: #3498db;
+}
+
+#about h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #3498db;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+#about:hover h2::after {
+    width: 100%;
 }
 
 .about-content {
@@ -416,6 +452,11 @@ body {
     gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
+    transition: transform 0.3s ease;
+}
+
+.about-content:hover {
+    transform: translateY(-5px);
 }
 
 .profile-image {
@@ -423,19 +464,42 @@ body {
     height: 300px;
     border-radius: 50%;
     object-fit: cover;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .about-text {
     flex: 1;
+    transition: all 0.3s ease;
+}
+
+.about-text:hover {
+    transform: translateX(10px);
 }
 
 .about-text h3 {
     color: #2c3e50;
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.about-text:hover h3 {
+    color: #3498db;
 }
 
 .about-text p {
     margin-bottom: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.about-text:hover p {
+    transform: translateX(5px);
+    color: #34495e;
 }
 
 /* Contact Section */
@@ -580,6 +644,19 @@ footer {
     .gallery {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text:hover {
+        transform: translateY(5px);
+    }
+
+    .about-text:hover p {
+        transform: translateY(5px);
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -592,4 +669,4 @@ footer {
     .gallery {
         grid-template-columns: 1fr;
     }
-} 
+}
