@@ -69,37 +69,198 @@ function loadGalleryImages() {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = ''; // Clear existing gallery items
     
-    galleryImages.forEach((image, index) => {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item';
+    // Add loading indicator
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.className = 'loading-indicator';
+    loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading gallery...';
+    gallery.appendChild(loadingIndicator);
+    
+    // Pagination settings
+    const itemsPerPage = 20; // Show 20 images per page
+    const totalImages = galleryImages.length;
+    const totalPages = Math.ceil(totalImages / itemsPerPage);
+    let currentPage = 1;
+    
+    // Create pagination controls
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pagination';
+    gallery.parentNode.insertBefore(paginationContainer, gallery.nextSibling);
+    
+    // Function to load a specific page
+    function loadPage(pageNumber) {
+        // Show loading indicator
+        loadingIndicator.style.display = 'flex';
         
-        galleryItem.innerHTML = `
-            <img src="${image.path}" alt="${image.alt}">
-            <div class="gallery-overlay">
-                <div class="gallery-buttons">
-                    <button class="view-btn" data-img="${image.path}"><i class="fas fa-eye"></i> View</button>
-                    <a href="${image.path}" download class="download-btn"><i class="fas fa-download"></i> Download</a>
-                </div>
-            </div>
-        `;
+        // Clear gallery
+        gallery.innerHTML = '';
+        gallery.appendChild(loadingIndicator);
         
-        gallery.appendChild(galleryItem);
-    });
-
-    // Reinitialize image viewer for new gallery items
-    initializeImageViewer();
+        // Calculate start and end indices for the current page
+        const startIndex = (pageNumber - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, totalImages);
+        
+        // Use setTimeout to allow the UI to update before loading images
+        setTimeout(() => {
+            // Create a document fragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            // Load images for the current page
+            for (let i = startIndex; i < endIndex; i++) {
+                const image = galleryImages[i];
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                galleryItem.innerHTML = `
+                    <img src="${image.path}" alt="${image.alt}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-buttons">
+                            <button class="view-btn" data-img="${image.path}"><i class="fas fa-eye"></i> View</button>
+                            <a href="${image.path}" download class="download-btn"><i class="fas fa-download"></i> Download</a>
+                        </div>
+                    </div>
+                `;
+                
+                fragment.appendChild(galleryItem);
+            }
+            
+            // Clear gallery and append the fragment
+            gallery.innerHTML = '';
+            gallery.appendChild(fragment);
+            
+            // Hide loading indicator
+            loadingIndicator.style.display = 'none';
+            
+            // Update pagination controls
+            updatePagination(pageNumber);
+            
+            // Initialize image viewer for the current page
+            initializeImageViewer();
+        }, 100);
+    }
+    
+    // Function to update pagination controls
+    function updatePagination(currentPage) {
+        paginationContainer.innerHTML = '';
+        
+        // Previous button
+        const prevButton = document.createElement('button');
+        prevButton.className = 'pagination-btn prev-btn';
+        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevButton.disabled = currentPage === 1;
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                loadPage(currentPage - 1);
+            }
+        });
+        paginationContainer.appendChild(prevButton);
+        
+        // Page numbers
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        // First page
+        if (startPage > 1) {
+            const firstPageBtn = document.createElement('button');
+            firstPageBtn.className = 'pagination-btn';
+            firstPageBtn.textContent = '1';
+            firstPageBtn.addEventListener('click', () => loadPage(1));
+            paginationContainer.appendChild(firstPageBtn);
+            
+            if (startPage > 2) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'pagination-ellipsis';
+                ellipsis.textContent = '...';
+                paginationContainer.appendChild(ellipsis);
+            }
+        }
+        
+        // Page numbers
+        for (let i = startPage; i <= endPage; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+            pageBtn.textContent = i;
+            pageBtn.addEventListener('click', () => loadPage(i));
+            paginationContainer.appendChild(pageBtn);
+        }
+        
+        // Last page
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'pagination-ellipsis';
+                ellipsis.textContent = '...';
+                paginationContainer.appendChild(ellipsis);
+            }
+            
+            const lastPageBtn = document.createElement('button');
+            lastPageBtn.className = 'pagination-btn';
+            lastPageBtn.textContent = totalPages;
+            lastPageBtn.addEventListener('click', () => loadPage(totalPages));
+            paginationContainer.appendChild(lastPageBtn);
+        }
+        
+        // Next button
+        const nextButton = document.createElement('button');
+        nextButton.className = 'pagination-btn next-btn';
+        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                loadPage(currentPage + 1);
+            }
+        });
+        paginationContainer.appendChild(nextButton);
+    }
+    
+    // Load the first page
+    loadPage(1);
 }
 
 // Function to initialize image viewer
 function initializeImageViewer() {
-    const viewButtons = document.querySelectorAll('.view-btn');
-    viewButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const imgSrc = button.getAttribute('data-img');
-            const viewerImage = document.querySelector('.image-viewer img');
-            viewerImage.src = imgSrc;
-            document.querySelector('.image-viewer').classList.add('active');
-        });
+    const imageViewer = document.querySelector('.image-viewer');
+    const viewerImage = document.querySelector('.image-viewer img');
+    const closeViewer = document.querySelector('.close-viewer');
+    
+    // Use event delegation for better performance
+    document.querySelector('.gallery').addEventListener('click', (e) => {
+        const viewBtn = e.target.closest('.view-btn');
+        if (viewBtn) {
+            const imgSrc = viewBtn.getAttribute('data-img');
+            
+            // Preload the image before showing it
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                viewerImage.src = imgSrc;
+                imageViewer.classList.add('active');
+            };
+            tempImg.src = imgSrc;
+        }
+    });
+    
+    // Close viewer when clicking the close button or outside the image
+    closeViewer.addEventListener('click', () => {
+        imageViewer.classList.remove('active');
+    });
+    
+    imageViewer.addEventListener('click', (e) => {
+        if (e.target === imageViewer) {
+            imageViewer.classList.remove('active');
+        }
+    });
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!imageViewer.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+            imageViewer.classList.remove('active');
+        }
     });
 }
 
@@ -208,18 +369,8 @@ document.addEventListener('DOMContentLoaded', function() {
     loadSlideshowImages();
     
     // Initialize image viewer for the modal
-    const imageViewer = document.querySelector('.image-viewer');
-    const closeViewer = document.querySelector('.close-viewer');
-    
-    closeViewer.addEventListener('click', () => {
-        imageViewer.classList.remove('active');
-    });
-    
-    imageViewer.addEventListener('click', (e) => {
-        if (e.target === imageViewer) {
-            imageViewer.classList.remove('active');
-        }
-    });
+    // Note: The image viewer is now initialized in the loadGalleryImages function
+    // after all images are loaded, so we don't need to initialize it here
 });
 
 // Form submission handling
