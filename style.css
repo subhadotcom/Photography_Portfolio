@@ -475,12 +475,27 @@ html {
 #about {
     padding: 5rem 2rem;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
     animation: fadeIn 1s ease-out;
+    position: relative;
+    overflow: hidden;
 }
 
 #about:hover {
     background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+}
+
+#about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%233498db" stroke-width="0.5" stroke-dasharray="5,5"/></svg>') repeat;
+    opacity: 0.05;
+    z-index: 0;
+    animation: backgroundScroll 20s linear infinite;
 }
 
 #about h2 {
@@ -491,11 +506,12 @@ html {
     display: inline-block;
     left: 50%;
     transform: translateX(-50%);
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 #about:hover h2 {
     color: #3498db;
+    transform: translateX(-50%) translateY(-5px);
 }
 
 #about h2::after {
@@ -520,6 +536,8 @@ html {
     gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
     transition: transform 0.3s ease;
 }
 
@@ -538,7 +556,7 @@ html {
 }
 
 .profile-image:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(5deg);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
@@ -555,21 +573,115 @@ html {
 .about-text h3 {
     color: #2c3e50;
     margin-bottom: 1rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
 }
 
 .about-text:hover h3 {
     color: #3498db;
 }
 
+.about-text h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #3498db;
+    transition: width 0.3s ease;
+}
+
+.about-text:hover h3::after {
+    width: 100%;
+}
+
 .about-text p {
     margin-bottom: 1rem;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
+    line-height: 1.6;
 }
 
 .about-text:hover p {
     transform: translateX(5px);
     color: #34495e;
+}
+
+/* Dark Mode About Section Hover Effects */
+body.dark-mode #about {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+body.dark-mode #about:hover {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+}
+
+body.dark-mode #about h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode #about:hover h2 {
+    color: #3498db;
+}
+
+body.dark-mode .about-text h3 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .about-text:hover h3 {
+    color: #3498db;
+}
+
+body.dark-mode .about-text p {
+    color: #e0e0e0;
+}
+
+body.dark-mode .about-text:hover p {
+    color: #f5f5f5;
+}
+
+/* Responsive About Section Hover Effects */
+@media screen and (max-width: 992px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text:hover {
+        transform: translateY(5px);
+    }
+
+    .about-text:hover p {
+        transform: translateY(5px);
+    }
+
+    .profile-image {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .about-text {
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .about-text h3::after {
+        display: none;
+    }
 }
 
 /* Contact Section */
@@ -1461,5 +1573,52 @@ body.dark-mode .theme-toggle i.fa-moon {
     
     .theme-toggle i {
         font-size: 1rem;
+    }
+}
+
+/* Dark Mode Header Hover Effects */
+body.dark-mode header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+}
+
+body.dark-mode header:hover {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+}
+
+body.dark-mode nav a:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive Header Hover Effects */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    nav a {
+        padding: 0.5rem;
+    }
+
+    nav a:hover {
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        padding: 0.5rem;
+    }
+
+    nav a:hover::before {
+        transform: translateX(0);
     }
 }
