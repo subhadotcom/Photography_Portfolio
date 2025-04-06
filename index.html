@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="main-nav">
         <div class="logo">
-            <h1>Wildlife Photography</h1>
+            <h1>Galaxy Gallary Photography</h1>
         </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
         <ul class="nav-links">
             <li><a href="#hero">Home</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
@@ -25,15 +29,7 @@
     <section id="hero">
         <div class="slideshow-container">
             <div class="slides">
-                <div class="slide active">
-                    <img src="images/1_9.jpg" alt="Photography 1">
-                </div>
-                <div class="slide">
-                    <img src="images/1_9.jpg" alt="Photography 2">
-                </div>
-                <div class="slide">
-                    <img src="images/1_9.jpg" alt="Photography 3">
-                </div>
+                <!-- Slides will be dynamically added here by JavaScript -->
             </div>
             <button class="slide-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
             <button class="slide-btn next-btn"><i class="fas fa-chevron-right"></i></button>
@@ -49,54 +45,7 @@
     <section id="portfolio">
         <h2>Portfolio</h2>
         <div class="gallery">
-            
-            <div class="gallery-item">
-                <img src="images/1_9.jpg" alt="Wildlife Photography">
-                <div class="gallery-overlay">
-                    <div class="gallery-buttons">
-                        <button class="view-btn" data-img="images/1_9.jpg"><i class="fas fa-eye"></i> View</button>
-                        <a href="images/1_9.jpg" download class="download-btn"><i class="fas fa-download"></i> Download</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <img src="images/1_9.jpg" alt="Wildlife Photography">
-                <div class="gallery-overlay">
-                    <div class="gallery-buttons">
-                        <button class="view-btn" data-img="images/1_9.jpg"><i class="fas fa-eye"></i> View</button>
-                        <a href="images/1_9.jpg" download class="download-btn"><i class="fas fa-download"></i> Download</a>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="images/1_9.jpg" alt="Wildlife Photography">
-                <div class="gallery-overlay">
-                    <div class="gallery-buttons">
-                        <button class="view-btn" data-img="images/1_9.jpg"><i class="fas fa-eye"></i> View</button>
-                        <a href="images/1_9.jpg" download class="download-btn"><i class="fas fa-download"></i> Download</a>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="images/1_9.jpg" alt="Wildlife Photography">
-                <div class="gallery-overlay">
-                    <div class="gallery-buttons">
-                        <button class="view-btn" data-img="images/1_9.jpg"><i class="fas fa-eye"></i> View</button>
-                        <a href="images/1_9.jpg" download class="download-btn"><i class="fas fa-download"></i> Download</a>
-                    </div>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="images/1_9.jpg" alt="Wildlife Photography">
-                <div class="gallery-overlay">
-                    <div class="gallery-buttons">
-                        <button class="view-btn" data-img="images/1_9.jpg"><i class="fas fa-eye"></i> View</button>
-                        <a href="images/1_9.jpg" download class="download-btn"><i class="fas fa-download"></i> Download</a>
-                    </div>
-                </div>
-            </div>
-            
+            <!-- Gallery items will be dynamically added here by JavaScript -->
         </div>
     </section>
 

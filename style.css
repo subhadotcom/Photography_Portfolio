@@ -415,51 +415,100 @@ footer {
     cursor: pointer;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .main-nav {
-        flex-direction: column;
-        padding: 1rem;
-    }
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
 
-    .nav-links {
-        margin-top: 1rem;
-    }
-
-    .nav-links li {
-        margin: 0 1rem;
-    }
-
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
     .hero-content h1 {
         font-size: 2.5rem;
     }
-
-    .about-content {
-        flex-direction: column;
-        text-align: center;
+    
+    .hero-content p {
+        font-size: 1.2rem;
     }
-
-    .profile-image {
-        width: 200px;
-        height: 200px;
+    
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
     .nav-links {
-        flex-direction: column;
-        text-align: center;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-
+    
+    .nav-links.active {
+        display: block;
+    }
+    
     .nav-links li {
-        margin: 0.5rem 0;
+        display: block;
+        margin: 1rem 0;
     }
-
+    
     .hero-content h1 {
         font-size: 2rem;
     }
-
-    .gallery-buttons {
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .about-content {
         flex-direction: column;
+    }
+    
+    .profile-image {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 2rem;
+    }
+    
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .slide-btn {
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+        padding: 0.8rem;
+    }
+    
+    .social-links a {
+        font-size: 1.2rem;
     }
 } 
