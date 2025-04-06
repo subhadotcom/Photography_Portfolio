@@ -56,11 +56,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Image data - separate arrays for hero section and gallery
 const heroImages = [
-    { path: 'images/20220409_135608.jpg', alt: 'Nature Photography 1' },
-    { path: 'images/20220409_134848.jpg', alt: 'Nature Photography 2' },
-    { path: 'images/20220409_134915.jpg', alt: 'Nature Photography 3' },
-    { path: 'images/20220409_134347.jpg', alt: 'Nature Photography 4' },
-    { path: 'images/20220409_134548.jpg', alt: 'Nature Photography 5' },
+    { path: 'images/20230212_130019.jpg', alt: 'Nature Photography 1' },
+    { path: 'images/20220416_172142.jpg', alt: 'Nature Photography 2' },
+    { path: 'images/20220409_094558.jpg', alt: 'Nature Photography 3' },
 ];
 
 // Import gallery images from the separate file
