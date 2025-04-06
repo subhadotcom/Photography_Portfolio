@@ -67,158 +67,96 @@ const heroImages = [
 // Function to load gallery images
 function loadGalleryImages() {
     const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = ''; // Clear existing gallery items
+    if (!gallery) {
+        console.error('Gallery container not found');
+        return;
+    }
+    
+    // Clear existing gallery items
+    gallery.innerHTML = '';
     
     // Add loading indicator
     const loadingIndicator = document.createElement('div');
     loadingIndicator.className = 'loading-indicator';
-    loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading gallery...';
+    loadingIndicator.innerHTML = `
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Gallery...</div>
+        <div class="loading-progress">
+            <div class="loading-progress-bar"></div>
+        </div>
+    `;
     gallery.appendChild(loadingIndicator);
     
-    // Pagination settings
-    const itemsPerPage = 20; // Show 20 images per page
-    const totalImages = galleryImages.length;
-    const totalPages = Math.ceil(totalImages / itemsPerPage);
-    let currentPage = 1;
-    
-    // Create pagination controls
-    const paginationContainer = document.createElement('div');
-    paginationContainer.className = 'pagination';
-    gallery.parentNode.insertBefore(paginationContainer, gallery.nextSibling);
-    
-    // Function to load a specific page
-    function loadPage(pageNumber) {
-        // Show loading indicator
-        loadingIndicator.style.display = 'flex';
-        
-        // Clear gallery
-        gallery.innerHTML = '';
-        gallery.appendChild(loadingIndicator);
-        
-        // Calculate start and end indices for the current page
-        const startIndex = (pageNumber - 1) * itemsPerPage;
-        const endIndex = Math.min(startIndex + itemsPerPage, totalImages);
-        
-        // Use setTimeout to allow the UI to update before loading images
-        setTimeout(() => {
-            // Create a document fragment for better performance
-            const fragment = document.createDocumentFragment();
-            
-            // Load images for the current page
-            for (let i = startIndex; i < endIndex; i++) {
-                const image = galleryImages[i];
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                
-                galleryItem.innerHTML = `
-                    <img src="${image.path}" alt="${image.alt}" loading="lazy">
-                    <div class="gallery-overlay">
-                        <div class="gallery-buttons">
-                            <button class="view-btn" data-img="${image.path}"><i class="fas fa-eye"></i> View</button>
-                            <a href="${image.path}" download class="download-btn"><i class="fas fa-download"></i> Download</a>
-                        </div>
-                    </div>
-                `;
-                
-                fragment.appendChild(galleryItem);
-            }
-            
-            // Clear gallery and append the fragment
-            gallery.innerHTML = '';
-            gallery.appendChild(fragment);
-            
-            // Hide loading indicator
-            loadingIndicator.style.display = 'none';
-            
-            // Update pagination controls
-            updatePagination(pageNumber);
-            
-            // Initialize image viewer for the current page
-            initializeImageViewer();
-        }, 100);
+    // Check if galleryImages is defined
+    if (!galleryImages || !Array.isArray(galleryImages)) {
+        console.error('galleryImages is not defined or not an array');
+        loadingIndicator.querySelector('.loading-text').textContent = 'Error loading gallery';
+        return;
     }
     
-    // Function to update pagination controls
-    function updatePagination(currentPage) {
-        paginationContainer.innerHTML = '';
+    let loadedImages = 0;
+    const fragment = document.createDocumentFragment();
+    
+    // Function to update loading progress
+    function updateProgress() {
+        loadedImages++;
+        const progress = (loadedImages / galleryImages.length) * 100;
+        const progressBar = loadingIndicator.querySelector('.loading-progress-bar');
+        progressBar.style.width = `${progress}%`;
+        loadingIndicator.querySelector('.loading-text').textContent = 
+            `Loading Gallery... ${Math.round(progress)}%`;
         
-        // Previous button
-        const prevButton = document.createElement('button');
-        prevButton.className = 'pagination-btn prev-btn';
-        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        prevButton.disabled = currentPage === 1;
-        prevButton.addEventListener('click', () => {
-            if (currentPage > 1) {
-                loadPage(currentPage - 1);
-            }
-        });
-        paginationContainer.appendChild(prevButton);
-        
-        // Page numbers
-        const maxVisiblePages = 5;
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-        
-        if (endPage - startPage + 1 < maxVisiblePages) {
-            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        if (loadedImages === galleryImages.length) {
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+            }, 500);
         }
-        
-        // First page
-        if (startPage > 1) {
-            const firstPageBtn = document.createElement('button');
-            firstPageBtn.className = 'pagination-btn';
-            firstPageBtn.textContent = '1';
-            firstPageBtn.addEventListener('click', () => loadPage(1));
-            paginationContainer.appendChild(firstPageBtn);
-            
-            if (startPage > 2) {
-                const ellipsis = document.createElement('span');
-                ellipsis.className = 'pagination-ellipsis';
-                ellipsis.textContent = '...';
-                paginationContainer.appendChild(ellipsis);
-            }
-        }
-        
-        // Page numbers
-        for (let i = startPage; i <= endPage; i++) {
-            const pageBtn = document.createElement('button');
-            pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
-            pageBtn.textContent = i;
-            pageBtn.addEventListener('click', () => loadPage(i));
-            paginationContainer.appendChild(pageBtn);
-        }
-        
-        // Last page
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                const ellipsis = document.createElement('span');
-                ellipsis.className = 'pagination-ellipsis';
-                ellipsis.textContent = '...';
-                paginationContainer.appendChild(ellipsis);
-            }
-            
-            const lastPageBtn = document.createElement('button');
-            lastPageBtn.className = 'pagination-btn';
-            lastPageBtn.textContent = totalPages;
-            lastPageBtn.addEventListener('click', () => loadPage(totalPages));
-            paginationContainer.appendChild(lastPageBtn);
-        }
-        
-        // Next button
-        const nextButton = document.createElement('button');
-        nextButton.className = 'pagination-btn next-btn';
-        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        nextButton.disabled = currentPage === totalPages;
-        nextButton.addEventListener('click', () => {
-            if (currentPage < totalPages) {
-                loadPage(currentPage + 1);
-            }
-        });
-        paginationContainer.appendChild(nextButton);
     }
     
-    // Load the first page
-    loadPage(1);
+    // Load all images
+    galleryImages.forEach((image, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.setAttribute('data-index', index);
+        
+        const img = new Image();
+        img.src = image.path;
+        img.alt = image.alt || 'Gallery Image';
+        img.loading = 'lazy';
+        
+        // Handle successful image load
+        img.onload = function() {
+            updateProgress();
+            galleryItem.classList.add('loaded');
+        };
+        
+        // Handle image load error
+        img.onerror = function() {
+            console.error('Failed to load image:', image.path);
+            img.src = 'images/placeholder.jpg';
+            updateProgress();
+            galleryItem.classList.add('error');
+        };
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'gallery-overlay';
+        overlay.innerHTML = `
+            <div class="gallery-buttons">
+                <button class="view-btn" data-img="${image.path}"><i class="fas fa-eye"></i> View</button>
+                <a href="${image.path}" download class="download-btn"><i class="fas fa-download"></i> Download</a>
+            </div>
+        `;
+        
+        galleryItem.appendChild(img);
+        galleryItem.appendChild(overlay);
+        fragment.appendChild(galleryItem);
+    });
+    
+    // Clear gallery and append all items
+    gallery.appendChild(fragment);
+    
+    // Initialize image viewer
+    initializeImageViewer();
 }
 
 // Function to initialize image viewer
