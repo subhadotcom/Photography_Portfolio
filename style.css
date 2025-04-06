@@ -9,6 +9,7 @@ body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
+    animation: fadeIn 1s ease-out;
 }
 
 /* Navigation */
@@ -55,6 +56,7 @@ body {
     position: relative;
     height: 100vh;
     overflow: hidden;
+    animation: fadeIn 1.5s ease-out;
 }
 
 .slideshow-container {
@@ -100,15 +102,18 @@ body {
     color: white;
     z-index: 2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: slideUp 1s ease-out 0.5s both;
 }
 
 .hero-content h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
+    animation: slideInLeft 1s ease-out 1s both;
 }
 
 .hero-content p {
     font-size: 1.5rem;
+    animation: slideInRight 1s ease-out 1.2s both;
 }
 
 .slide-btn {
@@ -197,9 +202,10 @@ body {
     border-top: 4px solid #3498db;
     border-right: 4px solid #3498db;
     border-radius: 50%;
-    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    animation: spin 1s linear infinite;
     margin-bottom: 1.5rem;
     position: relative;
+    animation: spin 1s linear infinite;
 }
 
 .loading-spinner::after {
@@ -270,8 +276,8 @@ body {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes pulse {
@@ -303,6 +309,7 @@ body {
     background-color: #f9f9f9;
     position: relative;
     overflow: hidden;
+    animation: fadeIn 1s ease-out;
 }
 
 #portfolio::before {
@@ -351,6 +358,8 @@ body {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideUp 0.5s ease-out both;
+    animation-delay: calc(var(--item-index) * 0.1s);
 }
 
 .gallery-item.loaded {
@@ -368,6 +377,7 @@ body {
 .gallery-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    animation: pulse 1s ease-in-out infinite;
 }
 
 .gallery-item:hover img {
@@ -456,23 +466,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Loading animation for gallery items */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.gallery-item {
-    animation: fadeInUp 0.5s ease forwards;
-    animation-delay: calc(var(--item-index) * 0.1s);
-}
-
 /* Smooth scrolling for the entire page */
 html {
     scroll-behavior: smooth;
@@ -483,6 +476,7 @@ html {
     padding: 5rem 2rem;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     transition: background 0.3s ease;
+    animation: fadeIn 1s ease-out;
 }
 
 #about:hover {
@@ -540,6 +534,7 @@ html {
     object-fit: cover;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: float 3s ease-in-out infinite;
 }
 
 .profile-image:hover {
@@ -550,6 +545,7 @@ html {
 .about-text {
     flex: 1;
     transition: all 0.3s ease;
+    animation: slideInRight 1s ease-out 0.5s both;
 }
 
 .about-text:hover {
@@ -583,6 +579,7 @@ html {
     position: relative;
     overflow: hidden;
     transition: background 0.3s ease;
+    animation: fadeIn 1s ease-out;
 }
 
 #contact:hover {
@@ -628,6 +625,7 @@ html {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    animation: slideUp 1s ease-out 0.5s both;
 }
 
 .contact-form:hover {
@@ -644,6 +642,8 @@ html {
 .form-group {
     position: relative;
     margin-bottom: 1rem;
+    animation: slideInLeft 0.5s ease-out both;
+    animation-delay: calc(var(--group-index) * 0.1s);
 }
 
 .form-group label {
@@ -703,6 +703,7 @@ html {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    animation: pulse 2s ease-in-out infinite;
 }
 
 .contact-form button::before {
@@ -770,6 +771,7 @@ html {
     justify-content: center;
     align-items: center;
     z-index: 2000;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .image-viewer.active {
@@ -780,6 +782,7 @@ html {
     position: relative;
     max-width: 90%;
     max-height: 90vh;
+    animation: scaleIn 0.3s ease-out;
 }
 
 .viewer-content img {
@@ -886,6 +889,7 @@ header {
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    animation: slideDown 0.5s ease-out;
 }
 
 header:hover {
@@ -901,6 +905,7 @@ header:hover {
     position: relative;
     display: inline-block;
     transition: all 0.3s ease;
+    animation: slideInLeft 0.5s ease-out;
 }
 
 .logo::after {
@@ -939,6 +944,8 @@ nav a {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    animation: slideInRight 0.5s ease-out both;
+    animation-delay: calc(var(--nav-index) * 0.1s);
 }
 
 nav a::before {
@@ -971,6 +978,7 @@ footer {
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
+    animation: fadeIn 1s ease-out;
 }
 
 footer:hover {
@@ -1005,6 +1013,8 @@ footer::before {
 .footer-section {
     padding: 1rem;
     transition: transform 0.3s ease;
+    animation: slideUp 0.5s ease-out both;
+    animation-delay: calc(var(--section-index) * 0.1s);
 }
 
 .footer-section:hover {
@@ -1059,6 +1069,8 @@ footer::before {
     transition: all 0.3s ease;
     display: inline-block;
     position: relative;
+    animation: slideInLeft 0.5s ease-out both;
+    animation-delay: calc(var(--link-index) * 0.1s);
 }
 
 .footer-links a::before {
@@ -1125,5 +1137,182 @@ footer::before {
 
     nav a {
         padding: 0.5rem;
+    }
+}
+
+/* Base animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Hero Section Animations */
+#hero {
+    animation: fadeIn 1.5s ease-out;
+}
+
+.hero-content {
+    animation: slideUp 1s ease-out 0.5s both;
+}
+
+.hero-content h1 {
+    animation: slideInLeft 1s ease-out 1s both;
+}
+
+.hero-content p {
+    animation: slideInRight 1s ease-out 1.2s both;
+}
+
+/* Portfolio Section Animations */
+#portfolio {
+    animation: fadeIn 1s ease-out;
+}
+
+.gallery-item {
+    animation: slideUp 0.5s ease-out both;
+    animation-delay: calc(var(--item-index) * 0.1s);
+}
+
+.gallery-item:hover {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* About Section Animations */
+#about {
+    animation: fadeIn 1s ease-out;
+}
+
+.profile-image {
+    animation: float 3s ease-in-out infinite;
+}
+
+.about-text {
+    animation: slideInRight 1s ease-out 0.5s both;
+}
+
+/* Contact Section Animations */
+#contact {
+    animation: fadeIn 1s ease-out;
+}
+
+.contact-form {
+    animation: slideUp 1s ease-out 0.5s both;
+}
+
+.form-group {
+    animation: slideInLeft 0.5s ease-out both;
+    animation-delay: calc(var(--group-index) * 0.1s);
+}
+
+.contact-form button {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Header Animations */
+header {
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.logo {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+nav a {
+    animation: slideInRight 0.5s ease-out both;
+    animation-delay: calc(var(--nav-index) * 0.1s);
+}
+
+/* Footer Animations */
+footer {
+    animation: fadeIn 1s ease-out;
+}
+
+.footer-section {
+    animation: slideUp 0.5s ease-out both;
+    animation-delay: calc(var(--section-index) * 0.1s);
+}
+
+.footer-links a {
+    animation: slideInLeft 0.5s ease-out both;
+    animation-delay: calc(var(--link-index) * 0.1s);
+}
+
+/* Loading Indicator Animations */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Image Viewer Animations */
+.image-viewer {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.viewer-content {
+    animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .gallery-item {
+        animation-delay: calc(var(--item-index) * 0.05s);
+    }
+
+    .form-group {
+        animation-delay: calc(var(--group-index) * 0.05s);
+    }
+
+    nav a {
+        animation-delay: calc(var(--nav-index) * 0.05s);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-content h1 {
+        animation: slideUp 1s ease-out 0.5s both;
+    }
+
+    .hero-content p {
+        animation: slideUp 1s ease-out 0.7s both;
     }
 }
