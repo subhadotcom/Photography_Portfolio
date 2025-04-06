@@ -75,24 +75,24 @@ function loadGalleryImages() {
     // Clear existing gallery items
     gallery.innerHTML = '';
     
-    // Add loading indicator
-    const loadingIndicator = document.createElement('div');
-    loadingIndicator.className = 'loading-indicator';
-    loadingIndicator.innerHTML = `
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Loading Gallery...</div>
-        <div class="loading-progress">
-            <div class="loading-progress-bar"></div>
-        </div>
-    `;
-    gallery.appendChild(loadingIndicator);
+    // // Add loading indicator
+    // const loadingIndicator = document.createElement('div');
+    // loadingIndicator.className = 'loading-indicator';
+    // loadingIndicator.innerHTML = `
+    //     <div class="loading-spinner"></div>
+    //     <div class="loading-text">Loading Gallery...</div>
+    //     <div class="loading-progress">
+    //         <div class="loading-progress-bar"></div>
+    //     </div>
+    // `;
+    // gallery.appendChild(loadingIndicator);
     
-    // Check if galleryImages is defined
-    if (!galleryImages || !Array.isArray(galleryImages)) {
-        console.error('galleryImages is not defined or not an array');
-        loadingIndicator.querySelector('.loading-text').textContent = 'Error loading gallery';
-        return;
-    }
+    // // Check if galleryImages is defined
+    // if (!galleryImages || !Array.isArray(galleryImages)) {
+    //     console.error('galleryImages is not defined or not an array');
+    //     loadingIndicator.querySelector('.loading-text').textContent = 'Error loading gallery';
+    //     return;
+    // }
     
     let loadedImages = 0;
     const fragment = document.createDocumentFragment();
