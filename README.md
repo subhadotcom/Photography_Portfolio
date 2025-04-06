@@ -1,6 +1,6 @@
-# Wildlife Photography Portfolio Website
+# Photography Portfolio Website
 
-A professional wildlife photography portfolio website featuring a responsive design, image gallery with view and download options, contact form, and smooth animations.
+A professional photography portfolio website featuring a responsive design, image gallery with view and download options, contact form, and smooth animations.wildlife
 
 ## Features
 
@@ -14,7 +14,7 @@ A professional wildlife photography portfolio website featuring a responsive des
 ## Project Structure
 
 ```
-wildlife-photography/
+Photography_Portfolio/
 ├── index.html          # Main website page
 ├── thanks.html         # Thank you page after form submission
 ├── style.css          # Main stylesheet
@@ -22,8 +22,7 @@ wildlife-photography/
 └── images/            # Directory for website images
     ├── hero-bg.jpg    # Hero section background
     ├── profile.jpg    # Profile picture
-    ├── wildlife1.jpg  # Gallery images
-    ├── wildlife2.jpg
+    ├── Gallary.jpg  # Gallery images
     └── ...
 ```
 
@@ -33,13 +32,13 @@ wildlife-photography/
 2. Add your images to the `images` directory:
    - Add a hero background image as `hero-bg.jpg`
    - Add your profile picture as `profile.jpg`
-   - Add your wildlife photographs as `wildlife1.jpg`, `wildlife2.jpg`, etc.
+   - Add your wildlife photographs as `gallary1.jpg`, `gallary2.jpg`, etc.
 3. Update the content in `index.html`:
    - Modify the text content
    - Update social media links
    - Add or remove gallery items as needed
 4. Update the contact form email in `index.html`:
-   - Replace `subhadipghosh@outlook.in` with your email address
+   - Replace `youremail@gmail.com` with your email address
 5. Test the website locally by opening `index.html` in a web browser
 
 ## Customization
