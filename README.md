@@ -17,6 +17,8 @@ A professional photography portfolio website featuring a responsive design, imag
 Photography_Portfolio/
 ├── index.html          # Main website page
 ├── thanks.html         # Thank you page after form submission
+├── responsive.css      # responsive for all device
+├── gallery-images.js   # set all images path in a single file
 ├── style.css          # Main stylesheet
 ├── main.js            # JavaScript functionality
 └── images/            # Directory for website images
